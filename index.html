@@ -6,68 +6,74 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 </head>
 <body>
+<div class="container">
+    <h2 class="title">Kutter-Jordan-Bossen steganography method</h2>
+    <form class="form">
+        <h3>Шифрование</h3>
+        Вставьте исходное изображение
+        <div class="form-group">
+            <input class="form-control" type="file" name="baseFile" onchange="previewEncodeImage()">
+        </div>
 
-<h3 class="title">Kutter-Jordan-Bossen steganography method</h3>
-<form class="form">
-    <div class="form-group">
-        <input class="form-control" type="file" name="baseFile" onchange="previewEncodeImage()">
+        <div class="form-group">
+            <textarea class="form-control message" rows="2" placeholder="Сообщение" required></textarea>
+            <div id="count_message"></div>
+        </div>
+
+        <div class="form-group">
+            <button class="write btn btn-default" onclick="writeMessage()">Записать сообщение</button>
+        </div>
+    </form>
+
+    <div class="error" style="display: none;"></div>
+
+    <div class="images" style="display: none;">
+        <div class="sourceImage" style="display: none;">
+            <canvas style="display: none"></canvas>
+        </div>
+
+        <div class="modImage" style="display: none;">
+            <h3>Результат. Щелкните правой кнопкой мыши и сохраните изображение.</h3>
+            <canvas id="dwn"></canvas>
+        </div>
+
+        <div class="stgkeyImage" style="display: none;">
+            <h3>Ключ. Щелкните правой кнопкой мыши и сохраните изображение (понадобится для расшифровки).</h3>
+            <canvas></canvas>
+        </div>
     </div>
 
-    <div class="form-group">
-        <textarea class="form-control message" rows="2" placeholder="Сообщение" required></textarea>
-        <div id="count_message"></div>
-    </div>
+    <form class="form">
+        <h3>Дешифрование</h3>
+        <div class="form-group">
+            Вставьте изображение
+            <input class="form-control" type="file" name="decodeFile" onchange="previewDecodeImage()">
+        </div>
+        <div class="form-group">
+            Вставьте ключ
+            <input class="form-control" type="file" name="stgKeyImage" onchange="previewDecodeKeyImage()">
+        </div>
 
-    <div class="form-group">
-        <button class="write btn btn-default pull-right" onclick="writeMessage()">Записать сообщение</button>
-    </div>
-</form>
+        <div class="form-group">
+            <button class="read btn btn-default" onclick="readMessage()">Извлечь сообщение</button>
+        </div>
+    </form>
 
-<div class="error" style="display: none;"></div>
-
-<div class="images" style="display: none;">
-    <div class="sourceImage" style="display: none;">
-    <h3>Original</h3>
-        <canvas></canvas>
-    </div>
-
-    <div class="modImage" style="display: none;">
-    <h3>Stegofile</h3>
-        <canvas id="dwn"></canvas>
-    </div>
-
-
-    <div class="stgkeyImage" style="display: none;">
-    <h3>Stegokey</h3>
-        <canvas></canvas>
-    </div>
-</div>
-
-
-<form class="form">
-    <div class="form-group">
-        <input class="form-control" type="file" name="decodeFile" onchange="previewDecodeImage()">
-        <input class="form-control" type="file" name="stgKeyImage" onchange="previewDecodeKeyImage()">
-    </div>
-    <div class="form-group">
-        <button class="read btn btn-default pull-right" onclick="readMessage()">Извлечь сообщение</button>
-    </div>
-</form>
-
-<div class="binary-decode" style="display: none;">
-    <h3>Hidden message</h3>
-    <textarea class="form-control message" style="word-wrap:break-word;">
+    <div class="binary-decode" style="display: none;">
+        <h3>Hidden message</h3>
+        <textarea class="form-control message" style="word-wrap:break-word;">
     </textarea>
-</div>
+    </div>
 
-<div class="read" style="display: none;">
-    <h3>Input</h3>
-    <canvas></canvas>
-</div>
+    <div class="read" style="display: none;">
+        <h3>Input</h3>
+        <canvas></canvas>
+    </div>
 
-<div class="decodekey" style="display: none;">
-    <h3>Key image</h3>
-    <canvas></canvas>
+    <div class="decodekey" style="display: none;">
+        <h3>Key image</h3>
+        <canvas></canvas>
+    </div>
 </div>
 
 
